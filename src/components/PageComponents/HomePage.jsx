@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Loader from "../reusableComponents/Loader";
 import Herobanner from "../reusableComponents/Herobanner";
 import ProductCard from "../UI/ProductCard";
@@ -13,9 +13,7 @@ const HomePage = () => {
   return (
     <>
       <Herobanner />
-
       <Slider />
-
       {isLoading ? (
         <div className="w-full mt-10 h-[50vh] flex justify-center items-center">
           <Loader />
