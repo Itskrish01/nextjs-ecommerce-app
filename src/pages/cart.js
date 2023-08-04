@@ -6,12 +6,14 @@ import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import toast from "react-hot-toast";
 import { LuCheck, LuMinus, LuPlus, LuTrash2, LuX } from "react-icons/lu";
 const poppins = Poppins({ subsets: ["latin"], weight: "400" });
 
 const cart = () => {
+  const router = useRouter();
   const { cartItems, removeFromCart, increaseQuantity, decreaseQuantity } =
     useCart();
   const total = cartItems.reduce(
@@ -27,25 +29,12 @@ const cart = () => {
     return text.substring(0, maxLength - 3) + "...";
   }
 
-  const publishableKey = process.env.NEXT_PUBLIC_STRIPE_KEY;
-  const stripePromise = loadStripe(publishableKey);
-
   const handleCheckout = async () => {
-    const stripe = await stripePromise;
-
-    try {
-      const response = await axios.post("/api/stripe", {
-        cartItems,
-      });
-
-      const data = response.data;
-
-      toast.loading("Redirecting...");
-
-      stripe.redirectToCheckout({ sessionId: data.id });
-    } catch (error) {
-      console.error("Error during checkout:", error);
-    }
+    toast.loading("Redirecting...", { id: "fakeLoading" });
+    setTimeout(() => {
+      router.push("/success");
+      toast.remove("fakeLoading");
+    });
   };
 
   return (

@@ -174,7 +174,7 @@ const FilterSection = ({
                         className="focus:ring-action-primary text-primary-500 rounded border-slate-400 hover:border-slate-700 bg-transparent dark:border-slate-700 dark:hover:border-slate-500 dark:checked:bg-primary-500 focus:ring-primary-500 w-6 h-6"
                       />
                       <label
-                        htmlFor="Travel Bags"
+                        htmlFor="Keyboard"
                         className="pl-2.5 sm:pl-3.5 flex flex-col flex-1 justify-center select-none"
                       >
                         <span className="text-slate-900 ">Keyboard</span>
@@ -190,7 +190,7 @@ const FilterSection = ({
                         className="focus:ring-action-primary text-primary-500 rounded border-slate-400 hover:border-slate-700 bg-transparent dark:border-slate-700 dark:hover:border-slate-500 dark:checked:bg-primary-500 focus:ring-primary-500 w-6 h-6"
                       />
                       <label
-                        htmlFor="Laptop Sleeves"
+                        htmlFor="Smartphones"
                         className="pl-2.5 sm:pl-3.5 flex flex-col flex-1 justify-center select-none"
                       >
                         <span className="text-slate-900 ">Smartphones</span>
@@ -207,10 +207,26 @@ const FilterSection = ({
                         className="focus:ring-action-primary text-primary-500 rounded border-slate-400 hover:border-slate-700 bg-transparent dark:border-slate-700 dark:hover:border-slate-500 dark:checked:bg-primary-500 focus:ring-primary-500 w-6 h-6"
                       />
                       <label
-                        htmlFor="Accessories"
+                        htmlFor="Headphones"
                         className="pl-2.5 sm:pl-3.5 flex flex-col flex-1 justify-center select-none"
                       >
                         <span className="text-slate-900 ">Headphones</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div className="">
+                    <div className="flex text-sm sm:text-base">
+                      <input
+                        type="checkbox"
+                        onChange={() => handleCategoryChange("laptop")}
+                        checked={selectedCategories.includes("laptop")}
+                        className="focus:ring-action-primary text-primary-500 rounded border-slate-400 hover:border-slate-700 bg-transparent dark:border-slate-700 dark:hover:border-slate-500 dark:checked:bg-primary-500 focus:ring-primary-500 w-6 h-6"
+                      />
+                      <label
+                        htmlFor="Laptop"
+                        className="pl-2.5 sm:pl-3.5 flex flex-col flex-1 justify-center select-none"
+                      >
+                        <span className="text-slate-900 ">Laptop</span>
                       </label>
                     </div>
                   </div>
@@ -223,7 +239,7 @@ const FilterSection = ({
                         className="focus:ring-action-primary text-primary-500 rounded border-slate-400 hover:border-slate-700 bg-transparent dark:border-slate-700 dark:hover:border-slate-500 dark:checked:bg-primary-500 focus:ring-primary-500 w-6 h-6"
                       />
                       <label
-                        htmlFor="Accessories"
+                        htmlFor="iPad"
                         className="pl-2.5 sm:pl-3.5 flex flex-col flex-1 justify-center select-none"
                       >
                         <span className="text-slate-900 ">iPad</span>
