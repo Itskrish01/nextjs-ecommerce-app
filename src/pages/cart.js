@@ -2,6 +2,7 @@ import Button from "@/components/UI/Button";
 import Layout from "@/components/layoutComps/Layout";
 import { useCart } from "@/context/searchContext";
 import getStripe from "@/lib/getStripe";
+import axios from "axios";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
 import React from "react";
@@ -24,23 +25,24 @@ const cart = () => {
 
     return text.substring(0, maxLength - 3) + "...";
   }
-
   const handleCheckout = async () => {
     const stripe = await getStripe();
 
-    const response = await fetch("/api/stripe", {
-      method: "POST",
-      headers: { "Content-Type": "applicationjson" },
-      body: JSON.stringify(cartItems),
-    });
+    try {
+      const response = await axios.post("/api/stripe", cartItems, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    if (response.statusCode === 500) return;
+      const data = response.data;
 
-    const data = await response.json();
+      toast.loading("Redirecting...");
 
-    toast.loading("Redirecting...");
-
-    stripe.redirectToCheckout({ sessionId: data.id });
+      stripe.redirectToCheckout({ sessionId: data.id });
+    } catch (error) {
+      console.error("Error during checkout:", error);
+    }
   };
 
   return (
