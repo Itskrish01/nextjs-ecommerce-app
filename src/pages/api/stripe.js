@@ -3,6 +3,7 @@ import Stripe from "stripe";
 const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
+  console.log(req.method);
   console.log(JSON.parse(req.body));
 
   const redirectURL =
@@ -30,7 +31,6 @@ export default async function handler(req, res) {
             },
             unit_amount: Math.round(item.price * 82.77 * 100),
           },
-
           adjustable_quantity: {
             enabled: true,
             minimum: 1,
