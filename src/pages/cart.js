@@ -1,5 +1,5 @@
 import Button from "@/components/UI/Button";
-import CartItem from "@/components/UI/cartItem";
+import CartItem from "@/components/UI/CartItem";
 import Layout from "@/components/layoutComps/Layout";
 import { useCart } from "@/context/cartContext";
 import { Poppins } from "next/font/google";
