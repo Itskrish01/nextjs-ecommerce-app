@@ -5,9 +5,7 @@ import Loader from "@/components/reusableComponents/Loader";
 import useFetchProduct from "@/hooks/useFetchProduct";
 import { Poppins } from "next/font/google";
 import Head from "next/head";
-import "rc-slider/assets/index.css";
 import React, { useState } from "react";
-import { LuArrowRight } from "react-icons/lu";
 import { PiMagnifyingGlass } from "react-icons/pi";
 
 const poppins = Poppins({ subsets: ["latin"], weight: "400" });

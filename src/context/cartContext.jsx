@@ -70,6 +70,7 @@ const CartProvider = ({ children }) => {
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
+    setCartItems,
   };
 
   return (
