@@ -18,33 +18,30 @@ const Success = () => {
   }, []);
 
   return (
-    <div className=" min-h-[60vh]">
-      <div className="w-[1000px] bg-gray-100 flex justify-center items-center flex-col mt-40 m-auto p-[50px] rounded-[15px]">
-        <div className="h-44 w-44 capitalize">
+    <div className="min-h-screen px-4 flex justify-center items-center">
+      <div className="bg-gray-100 max-w-5xl px-6 py-8 rounded-lg w-full">
+        <div className="h-32 w-32 md:h-44 md:w-44 mx-auto">
           <Lottie animationData={SuccessAnimation} loop={true} />
         </div>
-        <h2 className="text-4xl font-bold">Thank you for your order!</h2>
-        <p className="text-xl mt-2 font-semibold text-center ">
+        <h2 className="text-2xl md:text-4xl font-bold text-center mt-4">
+          Thank you for your order!
+        </h2>
+        <p className="text-sm md:text-base mt-2 font-semibold text-center">
           Check your email inbox for the receipt.
         </p>
-        <p className="text-base mt-2 font-semibold text-center">
-          If you have any questions, please email
-          <a
-            className="text-[#474e68] ml-[5px]"
-            href="mailto:order@example.com"
-          >
+        <p className="text-xs md:text-sm mt-2 font-semibold text-center">
+          If you have any questions, please email{" "}
+          <a className="text-blue-600 ml-1" href="mailto:order@example.com">
             order@example.com
           </a>
         </p>
-        <Link href="/" className="mt-3">
-          <Button
-            type="button"
-            variant="primary"
-            onClick={() => router.push("/shop")}
-          >
-            Continue Shopping
-          </Button>
-        </Link>
+        <div className="mt-3 flex justify-center">
+          <Link href="/shop">
+            <Button type="button" variant="primary">
+              Continue Shopping
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );

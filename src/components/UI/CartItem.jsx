@@ -9,7 +9,6 @@ const CartItem = ({ item }) => {
     if (text.length <= maxLength) {
       return text;
     }
-
     return text.substring(0, maxLength - 3) + "...";
   }
   return (
