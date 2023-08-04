@@ -1,7 +1,8 @@
 import Button from "@/components/UI/Button";
 import Layout from "@/components/layoutComps/Layout";
 import { useCart } from "@/context/searchContext";
-import getStripe from "@/lib/getStripe";
+import { loadStripe } from "@stripe/stripe-js";
+
 import axios from "axios";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
@@ -25,14 +26,16 @@ const cart = () => {
 
     return text.substring(0, maxLength - 3) + "...";
   }
+
+  const publishableKey = process.env.NEXT_PUBLIC_STRIPE_KEY;
+  const stripePromise = loadStripe(publishableKey);
+
   const handleCheckout = async () => {
-    const stripe = await getStripe();
+    const stripe = await stripePromise;
 
     try {
-      const response = await axios.post("/api/stripe", cartItems, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const response = await axios.post("/api/stripe", {
+        cartItems,
       });
 
       const data = response.data;

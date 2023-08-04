@@ -4,7 +4,7 @@ const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
   console.log(req.method);
-  console.log(JSON.parse(req.body));
+  console.log(req.body);
 
   const redirectURL =
     process.env.NODE_ENV === "development"
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
         { shipping_rate: "shr_1M0jTdSFSFX5BTbYJDWnpFIp" },
         { shipping_rate: "shr_1M0jULSFSFX5BTbYqgk0G4Mw" },
       ],
-      line_items: JSON.parse(req.body).map((item) => {
+      line_items: req.body.cartItems.map((item) => {
         return {
           price_data: {
             currency: "inr",

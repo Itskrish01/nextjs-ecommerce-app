@@ -18,7 +18,7 @@ const Success = () => {
 
   return (
     <div className=" min-h-[60vh]">
-      <div className="w-[1000px] bg-gray-200 flex justify-center items-center flex-col mt-40 m-auto p-[50px] rounded-[15px]">
+      <div className="w-[1000px] bg-gray-100 flex justify-center items-center flex-col mt-40 m-auto p-[50px] rounded-[15px]">
         <div className="h-44 w-44 capitalize">
           <Lottie animationData={SuccessAnimation} loop={true} />
         </div>
