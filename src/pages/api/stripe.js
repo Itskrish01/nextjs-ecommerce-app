@@ -5,8 +5,13 @@ const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 export default async function handler(req, res) {
   if (req.method === "POST") {
     console.log(JSON.parse(req.body));
+
+    const redirectURL =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000"
+        : "https://nextjs-ecommerce-app-five.vercel.app";
+
     try {
-      const exchangeRate = 82.77;
       const params = {
         submit_type: "pay",
         mode: "payment",
@@ -17,17 +22,14 @@ export default async function handler(req, res) {
           { shipping_rate: "shr_1M0jULSFSFX5BTbYqgk0G4Mw" },
         ],
         line_items: JSON.parse(req.body).map((item) => {
-          const img = item.thumbnail;
-          const convertedPrice = item.price * exchangeRate;
-
           return {
             price_data: {
               currency: "inr",
               product_data: {
                 name: item.title,
-                images: [img],
+                images: [item.thumbnail],
               },
-              unit_amount: Math.round(convertedPrice * 100),
+              unit_amount: Math.round(item.price * 82.77 * 100),
             },
 
             adjustable_quantity: {
@@ -38,8 +40,8 @@ export default async function handler(req, res) {
           };
         }),
         mode: "payment",
-        success_url: `${req.headers.origin}/success`,
-        cancel_url: `${req.headers.origin}/canceled`,
+        success_url: `${redirectURL}/success`,
+        cancel_url: `${redirectURL}/canceled`,
       };
       // Create Checkout Sessions from body params.
       const session = await stripe.checkout.sessions.create(params);
