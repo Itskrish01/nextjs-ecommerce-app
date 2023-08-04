@@ -1,18 +1,31 @@
+import { useRouter } from "next/router";
 import React from "react";
 
 const Herobanner = () => {
+  const router = useRouter();
   return (
-    <div className="md:p-10 p-4 mt-8 text-center bg-gray-200/60 rounded-lg ">
-      <div className="">
-        <h5 className="text-gray-600 uppercase tracking-[5px] text-sm font-semibold">
-          Welcome to bueltin
-        </h5>
-        <h2 className="md:text-3xl text-xl font-bold md:leading-[46px] mt-3 md:px-44">
-          Craft narratives ✍🏻 that ignite{" "}
-          <span className="text-green-700">inspirtaion</span> 💡,
-          <span className="text-green-700">knowledge</span> 📕, and
-          <span className="text-green-700"> entertainment</span> 🎬
+    <div
+      className=" md:px-20 md:py-14 px-6 py-6 mt-8 bg-[#fbf0e4] rounded-lg"
+      style={{
+        backgroundImage: "url(/images/hero-right-2.cb4660d930692248be75.png)",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: 500,
+        backgroundPositionY: -50,
+        backgroundPositionX: 700,
+      }}
+    >
+      <div className="flex justify-center md:justify-start">
+        <h2 className="md:text-5xl md:text-left text-center md:flex-[0.5] text-green-700 text-2xl font-bold md:leading-[60px] ">
+          Get Upto 50% Off On Selected Headphone
         </h2>
+      </div>
+      <div className="mt-4 w-full md:w-auto">
+        <button
+          onClick={() => router.push("/shop")}
+          className="bg-green-700 md:px-10 px-2 py-1 w-full md:w-auto active:scale-90 hover:bg-green-900 md:py-3 text-base rounded-full transition text-white"
+        >
+          Shop now
+        </button>
       </div>
     </div>
   );

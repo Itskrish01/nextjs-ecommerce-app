@@ -3,7 +3,7 @@ import axios from "axios";
 const { useRouter } = require("next/router");
 const { useState, useEffect } = require("react");
 
-const useSearchResults = (searchTerm) => {
+const useSearchResults = (product_id) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [data, setData] = useState();
@@ -12,10 +12,10 @@ const useSearchResults = (searchTerm) => {
   useEffect(() => {
     try {
       setIsLoading(true);
-      if (router.query.term) {
+      if (product_id) {
         axios
           .get(
-            `https://newsapi.org/v2/everything?q=${router.query.term}&apiKey=${process.env.NEXT_PUBLIC_NEWS_API_KEY}`
+            `https://tiny-red-nematode-kit.cyclic.cloud/products/${product_id}`
           )
           .then((res) => {
             setData(res.data);
@@ -35,7 +35,7 @@ const useSearchResults = (searchTerm) => {
       console.log(error);
       setIsLoading(false);
     }
-  }, [router.query.term]);
+  }, [product_id]);
 
   return { isLoading, isError, data };
 };

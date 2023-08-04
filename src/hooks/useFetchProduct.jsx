@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const useNewsData = (url) => {
+const useFetchProduct = (url) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [data, setData] = useState();
@@ -26,4 +26,4 @@ const useNewsData = (url) => {
   return { isLoading, isError, data };
 };
 
-export default useNewsData;
+export default useFetchProduct;

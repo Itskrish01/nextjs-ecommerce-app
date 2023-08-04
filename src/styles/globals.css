@@ -29,11 +29,22 @@
 .lds-ring div:nth-child(3) {
   animation-delay: -0.15s;
 }
+
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg);
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+.swiper-slide {
+  width: 40% !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .swiper-slide {
+    width: 100% !important;
   }
 }

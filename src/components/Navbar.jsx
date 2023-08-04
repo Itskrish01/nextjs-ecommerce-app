@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { LuMenu, LuSearch, LuUser } from "react-icons/lu";
+import { LuMenu, LuSearch, LuShoppingCart, LuUser } from "react-icons/lu";
 import { HiChevronDown } from "react-icons/hi";
 import Link from "next/link";
-import { SearchContext } from "@/context/searchContext";
+import { SearchContext, useCart } from "@/context/searchContext";
 import { AnimatePresence, motion } from "framer-motion";
 import { CgClose } from "react-icons/cg";
 
@@ -12,6 +12,7 @@ const Navbar = ({ fontType }) => {
     useContext(SearchContext);
   const [Show, setShow] = useState(false);
   const location = useRouter();
+  const { cartItems } = useCart();
 
   return (
     <>
@@ -51,11 +52,16 @@ const Navbar = ({ fontType }) => {
             <LuUser size={18} />
             <p className="text-sm">Account</p>
           </div>
-          <img
-            className="inline-block h-8 w-8 rounded-full ring-2 ring-white"
-            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-            alt=""
-          />
+          <Link
+            href={"/cart"}
+            className="hidden md:flex items-center gap-2 font-medium relative"
+          >
+            <LuShoppingCart size={18} />
+
+            <div className="absolute -top-2 -right-2 bg-green-500 rounded-full w-5 h-5 flex items-center justify-center text-white text-xs">
+              {cartItems.length}
+            </div>
+          </Link>
         </div>
         <div
           onClick={() => setShow(true)}
@@ -103,8 +109,6 @@ const Navbar = ({ fontType }) => {
                         id="inline-full-name"
                         type="text"
                         placeholder="Search News..."
-                        onChange={(e) => setSearchTerms(e.target.value)}
-                        value={searchTerms}
                       />
                       <LuSearch className="absolute top-[11px] text-gray-600 right-3" />
                     </form>
@@ -156,16 +160,16 @@ const Navbar = ({ fontType }) => {
 
                   <li>
                     <Link
-                      href="/about"
-                      className="flex flex-row items-center h-12 text-gray-500 hover:text-gray-800"
+                      href={"/cart"}
+                      className="cursor-pointer flex flex-row items-center h-12 text-gray-500 hover:text-gray-800"
                     >
-                      <span
-                        className={`${
-                          location.pathname === "/about" ? "opacity-50" : ""
-                        } text-sm font-medium text-lightblack`}
-                      >
-                        Account
-                      </span>
+                      <div className="flex items-center gap-2 font-medium relative">
+                        <LuShoppingCart size={18} />
+                        Cart
+                        <div className="absolute -top-2 -right-2 bg-green-500 rounded-full w-5 h-5 flex items-center justify-center text-white text-xs">
+                          {cartItems.length}
+                        </div>
+                      </div>
                     </Link>
                   </li>
                 </ul>

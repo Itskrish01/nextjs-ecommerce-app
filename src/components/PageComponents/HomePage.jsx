@@ -1,63 +1,26 @@
-import axios from "axios";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { LuArrowRight } from "react-icons/lu";
-import NewsCard from "../UI/NewsCard";
 import Loader from "../reusableComponents/Loader";
-import { categories } from "./categories";
 import Herobanner from "../reusableComponents/Herobanner";
-import useNewsData from "@/hooks/useNewsData";
+import ProductCard from "../UI/ProductCard";
+import useFetchProduct from "@/hooks/useFetchProduct";
+import Slider from "../reusableComponents/Slider";
 
 const HomePage = () => {
-  const {
-    isLoading: isLoadingLatestNews,
-    isError: isErrorLatestNews,
-    data: latestNewsData,
-  } = useNewsData(
-    `https://newsapi.org/v2/top-headlines?country=in&apiKey=${process.env.NEXT_PUBLIC_NEWS_API_KEY}`
-  );
-
-  const {
-    isLoading: isLoadingSports,
-    isError: isErrorSports,
-    data: sportsData,
-  } = useNewsData(
-    `https://newsapi.org/v2/everything?q=sports&apiKey=${process.env.NEXT_PUBLIC_NEWS_API_KEY}`
-  );
-
-  const renderNewsSection = (news, title, link) => (
-    <div className="my-10">
-      <div className="flex items-center justify-between">
-        <h5 className="text-2xl font-semibold">{title}</h5>
-        <Link
-          className="text-green-700 font-semibold flex items-center gap-2"
-          href={link}
-        >
-          See all <LuArrowRight />
-        </Link>
-      </div>
-      <div className="grid mt-5 gap-8 place-items-center place-content-start lg:grid-cols-2 grid-cols-1">
-        {news?.articles.slice(0, 4).map((item, index) => (
-          <NewsCard
-            key={index}
-            item={item}
-            truncateLengthDescription={120}
-            truncateLengthTitle={70}
-          />
-        ))}
-      </div>
-    </div>
+  const { isLoading, isError, data } = useFetchProduct(
+    `https://tiny-red-nematode-kit.cyclic.cloud/products`
   );
 
   return (
     <>
       <Herobanner />
 
-      {isLoadingLatestNews ? (
+      <Slider />
+
+      {isLoading ? (
         <div className="w-full mt-10 h-[50vh] flex justify-center items-center">
           <Loader />
         </div>
-      ) : isErrorLatestNews ? (
+      ) : isError ? (
         <div className="w-full mt-10 h-[20vh] flex justify-center items-center">
           <h5 className="text-green-700 text-xl font-semibold">
             Some error occurred, Please try again later...
@@ -65,47 +28,79 @@ const HomePage = () => {
         </div>
       ) : (
         <div className="my-8">
-          {renderNewsSection(latestNewsData, "Latest News", "/latest-news")}
+          <div className="my-20">
+            <div className="flex items-center justify-between">
+              <h5 className="text-2xl font-semibold">Headphones</h5>
+            </div>
+            <div className="grid mt-5 gap-y-2 sm:gap-y-10 sm:gap-x-10 gap-x-4  lg:grid-cols-4 md:grid-cols-2 grid-cols-2">
+              {data
+                .filter((item) => item.category.includes("headphones"))
+                .slice(0, 8)
+                .map((item) => (
+                  <ProductCard key={item._id} item={item} />
+                ))}
+            </div>
+          </div>
         </div>
       )}
 
-      <div className="my-20" id="categories">
-        <div className="flex items-center justify-between">
-          <h5 className="text-2xl font-semibold">Categories</h5>
-        </div>
-        <div className="flex flex-wrap justify-center gap-10 items-center mt-6">
-          {categories.map((item, index) => (
-            <Link
-              key={index}
-              href={`/searchTerm/${item.name}`}
-              className="flex flex-col hover:bg-gray-200 border border-white hover:border-gray-300 px-4 py-2 rounded-md items-center justify-center"
-            >
-              <div className="p-0.5 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 rounded-full">
-                <img
-                  className="h-20 border-2 w-20 rounded-full"
-                  src={item.image}
-                  alt=""
-                />
-              </div>
-              <p className="text-sm mt-2 text-gray-600">{item.name}</p>
-            </Link>
-          ))}
-        </div>
-      </div>
-
-      {isLoadingSports ? (
+      {isLoading ? (
         <div className="w-full mt-10 h-[50vh] flex justify-center items-center">
           <Loader />
         </div>
-      ) : isErrorSports ? (
+      ) : isError ? (
         <div className="w-full mt-10 h-[20vh] flex justify-center items-center">
           <h5 className="text-green-700 text-xl font-semibold">
             Some error occurred, Please try again later...
           </h5>
         </div>
       ) : (
-        <div className="my-10">
-          {renderNewsSection(sportsData, "Sports News", "/searchTerm/sports")}
+        <div className="my-8">
+          <div className="my-20">
+            <div className="flex items-center justify-between">
+              <h5 className="text-2xl font-semibold">Apple products</h5>
+            </div>
+            <div className="grid mt-5 gap-y-2 sm:gap-y-10 sm:gap-x-10 gap-x-4  lg:grid-cols-4 md:grid-cols-2 grid-cols-2">
+              {data
+                .filter((item) => item.brand.toLowerCase() === "apple")
+                .slice(0, 8)
+                .map((item) => (
+                  <ProductCard key={item._id} item={item} />
+                ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isLoading ? (
+        <div className="w-full mt-10 h-[50vh] flex justify-center items-center">
+          <Loader />
+        </div>
+      ) : isError ? (
+        <div className="w-full mt-10 h-[20vh] flex justify-center items-center">
+          <h5 className="text-green-700 text-xl font-semibold">
+            Some error occurred, Please try again later...
+          </h5>
+        </div>
+      ) : (
+        <div className="my-8">
+          <div className="my-20">
+            <div className="flex items-center justify-between">
+              <h5 className="text-2xl font-semibold">Gaming products</h5>
+            </div>
+            <div className="grid mt-5 gap-y-2 sm:gap-y-10 sm:gap-x-10 gap-x-4  lg:grid-cols-4 md:grid-cols-2 grid-cols-2">
+              {data
+                .filter(
+                  (item) =>
+                    item.category.includes("mouse") ||
+                    item.category.includes("keyboard")
+                )
+                .slice(0, 10)
+                .map((item) => (
+                  <ProductCard key={item._id} item={item} />
+                ))}
+            </div>
+          </div>
         </div>
       )}
     </>
