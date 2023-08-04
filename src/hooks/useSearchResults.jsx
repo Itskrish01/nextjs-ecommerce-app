@@ -15,7 +15,7 @@ const useSearchResults = (product_id) => {
       if (product_id) {
         axios
           .get(
-            `https://tiny-red-nematode-kit.cyclic.cloud/products/${product_id}`
+            `https://lazy-jade-pigeon-shoe.cyclic.app/products/${product_id}`
           )
           .then((res) => {
             setData(res.data);

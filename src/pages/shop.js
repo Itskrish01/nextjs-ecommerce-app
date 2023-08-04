@@ -28,7 +28,7 @@ const shop = () => {
     }
   };
   const { isLoading, isError, data } = useFetchProduct(
-    `https://tiny-red-nematode-kit.cyclic.cloud/products`
+    `https://lazy-jade-pigeon-shoe.cyclic.app/products`
   );
 
   const handleRangeChange = (newRange) => {
