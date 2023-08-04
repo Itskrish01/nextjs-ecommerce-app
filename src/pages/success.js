@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useCart } from "@/context/searchContext";
+import { useCart } from "@/context/cartContext";
 import { runFireworks } from "@/lib/utils";
 import Lottie from "lottie-react";
 import SuccessAnimation from "../lib/success_animation.json";

@@ -1,4 +1,4 @@
-import SearchProvider from "@/context/searchContext";
+import SearchProvider from "@/context/cartContext";
 import "@/styles/globals.css";
 import { Toaster } from "react-hot-toast";
 

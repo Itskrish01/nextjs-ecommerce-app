@@ -1,15 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { LuMenu, LuSearch, LuShoppingCart, LuUser } from "react-icons/lu";
-import { HiChevronDown } from "react-icons/hi";
 import Link from "next/link";
-import { SearchContext, useCart } from "@/context/searchContext";
+import { useCart } from "@/context/cartContext";
 import { AnimatePresence, motion } from "framer-motion";
 import { CgClose } from "react-icons/cg";
 
-const Navbar = ({ fontType }) => {
-  const { searchTerms, setSearchTerms, onSubmitForm } =
-    useContext(SearchContext);
+const Navbar = () => {
   const [Show, setShow] = useState(false);
   const location = useRouter();
   const { cartItems } = useCart();
@@ -23,31 +20,20 @@ const Navbar = ({ fontType }) => {
         <div>
           <ul className="hidden md:flex items-start gap-8">
             <li className="flex items-center gap-2">
-              <a href="">Categories</a>
+              <Link href="/shop">Categories</Link>
             </li>
             <li>
-              <a href="">Deals</a>
+              <Link href="/shop">Deals</Link>
             </li>
             <li>
-              <a href="">Whats's new</a>
+              <Link href="/shop">Whats's new</Link>
             </li>
             <li>
-              <a href="">Devliery</a>
+              <Link href="/shop">Devliery</Link>
             </li>
           </ul>
         </div>
         <div className="hidden md:flex items-center gap-8">
-          <form onSubmit={onSubmitForm} className="md:w-2/3 relative">
-            <input
-              className="bg-gray-100 appearance-none border-2 border-gray-100 rounded-full w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-700"
-              id="inline-full-name"
-              type="text"
-              placeholder="Search News..."
-              onChange={(e) => setSearchTerms(e.target.value)}
-              value={searchTerms}
-            />
-            <LuSearch className="absolute top-[11px] text-gray-600 right-3" />
-          </form>
           <div className="flex items-center gap-2 font-medium">
             <LuUser size={18} />
             <p className="text-sm">Account</p>
@@ -88,7 +74,7 @@ const Navbar = ({ fontType }) => {
               transition={{ type: "tween", ease: [0.9, 0.1, 0.4, 1] }}
               className="min-h-screen md:hidden flex fixed top-0 z-[100000] left-0 flex-row bg-gray-100"
             >
-              <div className="flex flex-col w-66 bg-white overflow-hidden">
+              <div className="flex flex-col w-80 bg-white overflow-hidden">
                 <div className="flex items-center justify-between px-6 h-14 shadow-md">
                   <Link href={"/"}>
                     <h3 className={`text-3xl font-bold text-green-700`}>
@@ -103,17 +89,6 @@ const Navbar = ({ fontType }) => {
                 </div>
                 <ul className="flex flex-col py-6 px-5 list-none">
                   <li>
-                    <form onSubmit={onSubmitForm} className=" relative">
-                      <input
-                        className="bg-gray-100 appearance-none border-2 mb-2 border-gray-100 rounded-full w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-700"
-                        id="inline-full-name"
-                        type="text"
-                        placeholder="Search News..."
-                      />
-                      <LuSearch className="absolute top-[11px] text-gray-600 right-3" />
-                    </form>
-                  </li>
-                  <li>
                     <Link
                       href="/"
                       className="flex flex-row items-center h-12 text-gray-500 hover:text-gray-800"
@@ -124,28 +99,28 @@ const Navbar = ({ fontType }) => {
                     </Link>
                   </li>
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      href="/shop"
                       className="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800"
                     >
                       <span className="text-sm font-medium text-lightblack">
                         Deals
                       </span>
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      href="/shop"
                       className="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800"
                     >
                       <span className="text-sm font-medium text-lightblack">
                         What's new
                       </span>
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <Link
-                      href="/blog"
+                      href="/shop"
                       className="flex flex-row items-center h-12 text-gray-500 hover:text-gray-800"
                     >
                       <span

@@ -1,7 +1,7 @@
 import React from "react";
 import Rating from "react-rating";
 import { TiStarOutline, TiStarFullOutline } from "react-icons/ti";
-import { useCart } from "@/context/searchContext";
+import { useCart } from "@/context/cartContext";
 import { FiShoppingBag } from "react-icons/fi";
 import { LuHeart } from "react-icons/lu";
 import Link from "next/link";

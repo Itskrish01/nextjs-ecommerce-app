@@ -1,38 +1,23 @@
 import AddedCartToast from "@/components/UI/AddedCartToast";
 import { useRouter } from "next/router";
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, createContext, useContext, useEffect } from "react";
 import toast from "react-hot-toast";
 
-export const SearchContext = createContext("");
 export const CartContext = createContext([]);
-
-const SearchProvider = ({ children }) => {
-  const [searchTerms, setSearchTerms] = useState("");
-  const router = useRouter();
-
-  const onSubmitForm = (e) => {
-    e.preventDefault();
-    if (searchTerms !== "") {
-      router.push(`/searchTerm/${searchTerms}`);
-    }
-    return;
-  };
-
-  const contextValue = {
-    searchTerms,
-    setSearchTerms,
-    onSubmitForm,
-  };
-
-  return (
-    <SearchContext.Provider value={contextValue}>
-      <CartProvider>{children}</CartProvider>
-    </SearchContext.Provider>
-  );
-};
 
 const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cartItems");
+    if (storedCart) {
+      setCartItems(JSON.parse(storedCart));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const addToCart = (item) => {
     const existingItemIndex = cartItems.findIndex(
@@ -53,7 +38,7 @@ const CartProvider = ({ children }) => {
   const removeFromCart = (itemId) => {
     const updatedCart = cartItems.filter((cartItem) => cartItem._id !== itemId);
     setCartItems(updatedCart);
-    const findItem = cartItems.find((cartItems) => cartItems._id === itemId);
+    const findItem = cartItems.find((cartItem) => cartItem._id === itemId);
     toast.success(`Item (${findItem.title}) removed from cart successfully!`);
   };
 
@@ -61,7 +46,7 @@ const CartProvider = ({ children }) => {
     const updatedCart = cartItems.map((cartItem) => {
       if (cartItem._id === itemId) {
         const newQuantity = cartItem.quantity + 1;
-        const limitedQuantity = Math.min(newQuantity, cartItem.stock); // Limit increase to available stock
+        const limitedQuantity = Math.min(newQuantity, cartItem.stock);
         return { ...cartItem, quantity: limitedQuantity };
       } else {
         return cartItem;
@@ -85,7 +70,6 @@ const CartProvider = ({ children }) => {
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
-    setCartItems,
   };
 
   return (
@@ -99,4 +83,4 @@ export const useCart = () => {
   return useContext(CartContext);
 };
 
-export default SearchProvider;
+export default CartProvider;

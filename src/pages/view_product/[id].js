@@ -10,7 +10,7 @@ import { LuCheckCircle2, LuMinus, LuPlus } from "react-icons/lu";
 import { useEffect } from "react";
 import Loader from "@/components/reusableComponents/Loader";
 import Button from "@/components/UI/Button";
-import { useCart } from "@/context/searchContext";
+import { useCart } from "@/context/cartContext";
 import toast from "react-hot-toast";
 import { TiStarFullOutline, TiStarOutline } from "react-icons/ti";
 import Rating from "react-rating";
