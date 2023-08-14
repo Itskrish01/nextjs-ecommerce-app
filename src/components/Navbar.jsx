@@ -49,12 +49,32 @@ const Navbar = () => {
             </div>
           </Link>
         </div>
-        <div
+        <motion.div
+          initial={false}
+          animate={{ translateY: Show ? -10 : 0 }}
+          transition={{ duration: 0.3 }}
+          className="menu-icon md:hidden block cursor-pointer"
           onClick={() => setShow(true)}
-          className="text-xl border md:hidden block border-gray-600 p-1 rounded cursor-pointer"
         >
-          <LuMenu />
-        </div>
+          <motion.div
+            className="bar"
+            initial={false}
+            animate={{ rotate: Show ? 45 : 0, translateY: Show ? 18 : 0 }}
+            transition={{ duration: 0.3 }}
+          />
+          <motion.div
+            className="bar"
+            initial={false}
+            animate={{ opacity: Show ? 0 : 1 }}
+            transition={{ duration: 0.3 }}
+          />
+          <motion.div
+            className="bar"
+            initial={false}
+            animate={{ rotate: Show ? -45 : 0 }}
+            transition={{ duration: 0.3 }}
+          />
+        </motion.div>
       </div>
       <AnimatePresence>
         {Show && (

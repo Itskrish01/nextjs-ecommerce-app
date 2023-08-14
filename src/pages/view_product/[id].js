@@ -92,7 +92,7 @@ const viewProduct = () => {
                         {variant?.variant_images.map((item, index) => (
                           <div
                             key={index}
-                            className={`sm:h-[7.2rem] h-[5rem] border border-gray-400 cursor-pointer rounded-lg overflow-hidden block mb-4 mr-2 sm:mr-0 ${
+                            className={`sm:h-[7rem] h-[4rem] border border-gray-400 cursor-pointer rounded-lg overflow-hidden block mb-4 mr-2 sm:mr-0 ${
                               index === activeVariantImageIndex
                                 ? "opacity-60"
                                 : ""

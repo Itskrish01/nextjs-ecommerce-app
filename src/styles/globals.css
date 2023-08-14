@@ -30,6 +30,24 @@
   animation-delay: -0.15s;
 }
 
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+}
+
+.bar {
+  width: 25px;
+  height: 1px;
+  background-color: black;
+  margin: 4px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg);
