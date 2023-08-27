@@ -14,9 +14,7 @@ const useSearchResults = (product_id) => {
       setIsLoading(true);
       if (product_id) {
         axios
-          .get(
-            `https://lazy-jade-pigeon-shoe.cyclic.app/products/${product_id}`
-          )
+          .get(`https://shy-tan-perch-kilt.cyclic.cloud/products/${product_id}`)
           .then((res) => {
             setData(res.data);
             setIsError(false);

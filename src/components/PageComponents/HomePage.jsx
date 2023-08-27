@@ -7,7 +7,7 @@ import Slider from "../reusableComponents/Slider";
 
 const HomePage = () => {
   const { isLoading, isError, data } = useFetchProduct(
-    `https://lazy-jade-pigeon-shoe.cyclic.app/products`
+    `https://shy-tan-perch-kilt.cyclic.cloud/products`
   );
 
   return (
