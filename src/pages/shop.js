@@ -28,7 +28,7 @@ const shop = () => {
     }
   };
   const { isLoading, isError, data } = useFetchProduct(
-    `https://shy-tan-perch-kilt.cyclic.cloud/products`
+    `https://product-backend-api.vercel.app/products`
   );
 
   const handleRangeChange = (newRange) => {

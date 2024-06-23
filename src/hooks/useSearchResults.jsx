@@ -14,7 +14,7 @@ const useSearchResults = (product_id) => {
       setIsLoading(true);
       if (product_id) {
         axios
-          .get(`https://shy-tan-perch-kilt.cyclic.cloud/products/${product_id}`)
+          .get(`https://product-backend-api.vercel.app/products/${product_id}`)
           .then((res) => {
             setData(res.data);
             setIsError(false);
