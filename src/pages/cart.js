@@ -15,9 +15,11 @@ const cart = () => {
   const router = useRouter();
   const { cartItems } = useCart();
   const total = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
+    (acc, item) => acc + item.price * item.quantity + 24.0,
     0
   );
+
+  const totalWithTax = total + 24.0 + 5.0;
 
   const handleCheckout = async () => {
     toast.loading("Redirecting...", { id: "fakeLoading" });
@@ -93,7 +95,7 @@ const cart = () => {
                   </div>
                   <div className="flex justify-between font-semibold text-slate-900  text-base pt-4">
                     <span>Order total</span>
-                    <span>$276.00</span>
+                    <span>${total !== 0 ? totalWithTax.toFixed(2) : 0.0}</span>
                   </div>
                 </div>
                 <div className="mt-4">
